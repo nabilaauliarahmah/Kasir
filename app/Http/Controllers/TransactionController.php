@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -8,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
 use App\Models\Transaction;
 use App\Models\Cart;
+use PDF;
 
 class TransactionController extends Controller
 {
@@ -49,4 +51,5 @@ class TransactionController extends Controller
     {
     	return view('transaction.show', compact('transaction'));
     }
+
 }

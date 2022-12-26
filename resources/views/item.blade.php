@@ -32,10 +32,10 @@
                     @foreach($items as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->item_categpry_id}}</td>
+                        <td>{{$item->item_category_id}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->price}}</td>
-                        <td>{{$item->stok}}</td>
+                        <td>{{$item->stock}}</td>
                         <td>
                             @if($item->image !== null)
                                 <img src="{{ asset('storage/image_item/'.$item->image) }}" width="100px"/>
@@ -49,7 +49,7 @@
                                     data-toggle="modal" data-target="#editItem"
                                     data-id="{{ $item->id }}">Edit</button>
                                 <button type="button" class="btn btn-danger"
-                                    onclick="deleteConfirmation('{{ $item->id }}', '{{ $item->name }}' )">Hapus</button>
+                                    onclick="deleteConfirmation('{{ $item->id }}', '{{ $item->name }}' )">Delete</button>
                             </div>
                         </td>
                     </tr>

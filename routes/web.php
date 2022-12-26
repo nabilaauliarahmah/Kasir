@@ -40,6 +40,7 @@ Route::delete('/cart/{cart}', [App\Http\Controllers\CartController::class, 'dest
 Route::post('/transaction', [App\Http\Controllers\TransactionController::class, 'store'])->name('transaction.store');
 Route::get('/transaction', [App\Http\Controllers\TransactionController::class, 'index'])->name('transaction.index');
 Route::get('/transaction/{transaction}', [App\Http\Controllers\TransactionController::class, 'show'])->name('transaction.show');
+Route::get('/transaction/print', [App\Http\Controllers\TransactionController::class, 'print'])->name('transaction.print');
 
 Route::get('admin/itemcategories', [App\Http\Controllers\AdminController::class, 'itemcategories'])
     ->name('adminn.itemcategories')
@@ -47,8 +48,20 @@ Route::get('admin/itemcategories', [App\Http\Controllers\AdminController::class,
 
 Route::get('admin/items', [App\Http\Controllers\AdminController::class, 'items'])
     ->name('adminn.items')
-    ->middleware('is_admin');\
+    ->middleware('is_admin');
     
-Route::get('admin/carts', [App\Http\Controllers\AdminController::class, 'carts'])
-    ->name('adminn.carts')
+Route::get('admin/report', [App\Http\Controllers\AdminController::class, 'report'])
+    ->name('adminn.report')
+    ->middleware('is_admin');
+
+Route::get('admin/print_transaction', [App\Http\Controllers\AdminController::class, 'print_transaction'])
+    ->name('admin.print_transaction')
+    ->middleware('is_admin');
+
+Route::get('admin/report/export_transaction', [App\Http\Controllers\AdminController::class, 'export_transaction'])
+    ->name('admin.report.export_transaction')
+    ->middleware('is_admin');
+
+Route::post('admin/report/import_transaction', [App\Http\Controllers\AdminController::class, 'import_transaction'])
+    ->name('admin.report.import_transaction')
     ->middleware('is_admin');

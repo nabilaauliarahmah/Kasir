@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exports\TransactionDetailExport;
+use App\Imports\TransactionDetailImport;
+use App\Models\TransactionDetail;
 use  Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -45,5 +48,31 @@ class AdminController extends Controller
         $user = Auth::user();
         $carts = Cart::all();
         return view('cart', compact('user', 'carts'));
+    }
+
+    public function report(){
+        $user = Auth::user();
+        $transaction_details = TransactionDetail::all();
+        return view('report', compact('user', 'transaction_details'));
+    }
+
+    public function print_transaction(){
+        $transaction_details = TransactionDetail::all();
+        $pdf = PDF::loadView('print_transaction', ['transaction_details' => $transaction_details]);
+        return $pdf->download('transaction_report.pdf');
+    }
+
+    public function export_transaction(){
+        return Excel::download(new TransactionDetailExport, 'transactiondetails.xlsx');
+    }
+
+    public function import_transaction(Request $req){
+        Excel::import(new TransactionDetailImport, $req->file('file'));
+
+        $notification = array(
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('admin.report.import')->with($notification);
     }
 }

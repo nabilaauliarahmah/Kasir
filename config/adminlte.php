@@ -291,6 +291,12 @@ return [
 
     'menu' => [
     [
+        'text' => 'Item',
+        'url'  => 'admin/items',
+        'icon' => 'fas fa-fw fa-list',
+        'can'  => 'isAdmin',
+    ],
+    [
         'text' => 'Item Category',
         'url'  => 'admin/itemcategories',
         'icon' => 'fas fa-fw fa-list',
@@ -298,8 +304,8 @@ return [
     ],
     //
     [
-        'text' => 'Item',
-        'url'  => 'admin/items',
+        'text' => 'Transaction Report',
+        'url'  => 'admin/report',
         'icon' => 'fas fa-fw fa-list',
         'can'  => 'isAdmin',
     ],

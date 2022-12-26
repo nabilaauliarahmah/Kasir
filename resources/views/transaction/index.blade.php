@@ -7,7 +7,7 @@
     <table class="table table-striped mt-3">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price Total</th>
                 <th scope="col">Pay Total</th>
