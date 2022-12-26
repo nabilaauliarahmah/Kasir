@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Sistem</b>Kasir',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -291,135 +291,25 @@ return [
 
     'menu' => [
     [
-        'text' => 'Buku',
-        'url'  => 'admin/books',
-        'icon' => 'fas fa-fw fa-book',
+        'text' => 'Item Category',
+        'url'  => 'admin/itemcategories',
+        'icon' => 'fas fa-fw fa-list',
         'can'  => 'isAdmin',
     ],
-
-        // Navbar items:
-        'MAIN NAVIGATION',
+    //
     [
-        'text' => 'Blog',
-        'url'  => 'admin/blog',
+        'text' => 'Item',
+        'url'  => 'admin/items',
+        'icon' => 'fas fa-fw fa-list',
+        'can'  => 'isAdmin',
+    ],
+    
+    [
+        'text' => 'Transaction',
+        'url'  => 'user/transactions',
+        'icon' => 'fas fa-fw fa-list',
         'can'  => 'isUser',
     ],
-    [
-        'text' => 'Pages',
-        'url'  => 'admin/pages',
-        'icon' => 'fas fa-fw fa-file',
-        'can'  => ['isUser', 'isAdmin'],
-    ],
-    [
-        'header' => 'ACCOUNT SETTINGS',
-    ],
-    // Dimatiin dulu guys ini gk bisa jalan :)
-    // [
-    //     'text'  => 'Profile',
-    //     'route' => 'admin.profile',
-    //     'icon'  => 'fas fa-fw fa-user',
-    //     'can'  => 'isAdmin',
-    // ],
-    [
-        'text'  => 'Change Password',
-        'route' => 'admin.password',
-        'icon'  => 'fas fa-fw fa-lock',
-        'can'  => 'idAdmin',
-    ],
-
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
-
-        // Sidebar items:
-        
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
     ],
 
     /*
