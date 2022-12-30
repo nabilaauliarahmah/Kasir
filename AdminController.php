@@ -76,40 +76,5 @@ class AdminController extends Controller
         return Excel::download(new ItemExport, 'item.xlsx');
     }
 
-    public function submit_item(Request $req){
-
-        $validate = $req->validate([
-
-            'item_category_id' =>'required',
-            'name' =>'required',
-            'price' =>'required',
-            'stock' =>'required',
-        ]);
-
-        $item = new Item;
-
-
-        $item->item_category_id = $req->get('item_category_id');
-        $item->name = $req->get('name');
-        $item->price = $req->get('price');
-        $item->stock = $req->get('stock');
-
-        if($req->hasFile('image')){
-            $extension = $req->file('image')->extension();
-
-            $filename = 'image_item'.time().'.'. $extension;
-
-            $req->file('image')->storeAs('public/image_item', $filename);
-
-            $item->image = $filename;
-        }
-        $item->save();
-
-        $notification = array(
-            'message' =>'Data Buku berhasil ditambahkan', 'alert-type' =>'success'
-        );
-
-        return redirect()->route('adminn.items')->with($notification);
-    }
 
 }

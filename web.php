@@ -69,7 +69,3 @@ Route::get('admin/print_item', [App\Http\Controllers\AdminController::class, 'pr
 Route::get('admin/items/export_item', [App\Http\Controllers\AdminController::class, 'export_item'])
     ->name('admin.items.export_item')
     ->middleware('is_admin');
-
-Route::post('admin/items', [App\Http\Controllers\AdminController::class, 'submit_item'])
-    ->name('admin.items.submit_item')
-    ->middleware('is_admin');
