@@ -14,9 +14,6 @@
             <!-- Button -->
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahBukuModal"><i class="fa fa-plus"></i> Tambah Data</button>
             <a href="{{ route('admin.print_item') }}" target="_blank" class="btn btn-secondary"><i class="fa fa-print"></i>Print PDF</a>
-            <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="{{ route('admin.items.export_item') }}" class="btn btn-info" target="_blank">Export</a>
-            </div>    
             </hr>
             <table id="table-data" class="table table-bordered">
                 <thead>

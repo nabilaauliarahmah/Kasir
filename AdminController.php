@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Exports\TransactionDetailExport;
-use App\Exports\ItemExport;
+use App\Imports\TransactionDetailImport;
 use App\Models\TransactionDetail;
 use  Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
@@ -75,6 +75,4 @@ class AdminController extends Controller
     public function export_item(){
         return Excel::download(new ItemExport, 'item.xlsx');
     }
-
-
 }

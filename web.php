@@ -65,7 +65,3 @@ Route::get('admin/report/export_transaction', [App\Http\Controllers\AdminControl
 Route::get('admin/print_item', [App\Http\Controllers\AdminController::class, 'print_item'])
     ->name('admin.print_item')
     ->middleware('is_admin');
-
-Route::get('admin/items/export_item', [App\Http\Controllers\AdminController::class, 'export_item'])
-    ->name('admin.items.export_item')
-    ->middleware('is_admin');
