@@ -16,12 +16,12 @@ class TransactionDetailImport implements WithHeadingRow ,ToModel
     public function model(array $row)
     {
         return new TransactionDetail([
-            'id' => $row['id'],
+            
             'transaction_id' => $row['transaction_id'],
             'item_id' => $row['item_id'],
             'quantity' => $row['quantity'],
             'subtotal' => $row['subtotal'],
-            'date' => $row['date'],
+            
         ]);
     }
 }

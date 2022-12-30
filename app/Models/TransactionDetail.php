@@ -13,12 +13,12 @@ class TransactionDetail extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'id',
+        
         'transaction_id',
         'item_id',
         'quantity',
         'subtotal',
-        'date'
+        
     ];
 
     public function transaction(){
