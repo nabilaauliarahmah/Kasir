@@ -1,18 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Exports\TransactionDetailExport;
-use App\Imports\TransactionDetailImport;
-use App\Models\TransactionDetail;
-use  Barryvdh\DomPDF\Facade\Pdf;
-use Maatwebsite\Excel\Facades\Excel;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use App\Models\TransactionDetail;
 use App\Models\ItemCategory;
 use App\Models\Cart;
 use App\Models\Item;
+use App\Exports\TransactionDetailExport;
+use App\Exports\ItemExport;
+use App\Imports\TransactionDetailImport;
+use App\Imports\ItemImport;
+use DB;
+use  Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -74,5 +78,71 @@ class AdminController extends Controller
 
     public function export_item(){
         return Excel::download(new ItemExport, 'item.xlsx');
+    }
+
+    public function submit_item(Request $req){
+
+        $validate = $req->validate([
+
+            'item_category_id' =>'required',
+            'name' =>'required',
+            'price' =>'required',
+            'stock' =>'required',
+        ]);
+
+        $item = new Item;
+
+
+        $item->item_category_id = $req->get('item_category_id');
+        $item->name = $req->get('name');
+        $item->price = $req->get('price');
+        $item->stock = $req->get('stock');
+
+        if($req->hasFile('image')){
+            $extension = $req->file('image')->extension();
+
+            $filename = 'image_item'.time().'.'. $extension;
+
+            $req->file('image')->storeAs('public/image_item', $filename);
+
+            $item->image = $filename;
+        }
+        $item->save();
+
+        $notification = array(
+            'message' =>'Data Buku berhasil ditambahkan', 'alert-type' =>'success'
+        );
+
+        return redirect()->route('adminn.items')->with($notification);
+    }
+
+    public function import_transaction(Request $req){
+        Excel::import(new TransactionDetailImport, $req->file('file'));
+        
+        $notification = array(
+            'message' => 'Import data berhasil',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('admin.report')->with($notification);
+    }
+
+    public function import_item(Request $req){
+        Excel::import(new ItemImport, $req->file('file'));
+        
+        $notification = array(
+            'message' => 'Import data berhasil',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('adminn.items')->with($notification);
+    }
+
+    public function delete_item($id){
+        DB::table('items')->where('id',$id)->delete();
+
+        $notification = array(
+            'message' => 'Data Berhasil Dihapus',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('adminn.items')->with($notification);
     }
 }

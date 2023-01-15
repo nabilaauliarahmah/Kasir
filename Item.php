@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\ItemCategory as Category;
 use App\Models\Cart;
 use App\Models\Transaction;
@@ -13,7 +14,16 @@ use App\Exports;
 class Item extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $guarded = [];
+
+    protected $fillable = [
+        'item_category_id',
+        'name',
+        'price',
+        'stock',
+    ];
+
     public function category(){
         return $this->belongsTo(Category::class, 'item_category_id');
     }

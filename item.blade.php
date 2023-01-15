@@ -12,8 +12,12 @@
 		<div class="card-header">{{ __('Item') }}</div>
 		<div class="card-body">
             <!-- Button -->
-            <button class="btn btn-primary" data-toggle="modal" data-target="#tambahBukuModal"><i class="fa fa-plus"></i> Tambah Data</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#tambahBukuModal"><i class="fa fa-plus"></i>Add Item</button>
             <a href="{{ route('admin.print_item') }}" target="_blank" class="btn btn-secondary"><i class="fa fa-print"></i>Print PDF</a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ route('admin.items.export_item') }}" class="btn btn-info" target="_blank">Export</a>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#importDataModal">Import</button>
+            </div>    
             </hr>
             <table id="table-data" class="table table-bordered">
                 <thead>
@@ -48,14 +52,89 @@
                                 <button type="button" id="btn-edit-buku" class="btn btn-success"
                                     data-toggle="modal" data-target="#editItem"
                                     data-id="{{ $item->id }}">Edit</button>
-                                <button type="button" class="btn btn-danger"
-                                    onclick="deleteConfirmation('{{ $item->id }}', '{{ $item->name }}' )">Delete</button>
+                                <form action="{{ url('admin/deletes/'.$item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin Hapus')">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger btn sm">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- TAMBAH DATA -->
+<div class="modal fade" id="tambahBukuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('admin.items.submit_item') }}" enctype="multipart/form-data">
+                    @csrf
+                        
+                        <div class="form-group">
+                            <label for="item_category_id">Item Category ID</label>
+                            <input type="text" class="form-control" name="item_category_id" id="item_category_id" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="year" class="form-control" name="name" id="name" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="text" class="form-control" name="price" id="price" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">Stock</label>
+                            <input type="text" class="form-control" name="stock" id="stock" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image<label>
+                            <input type="file" class="form-control" name="image" id="image"/>
+                        </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL IMPORT DATA FORM -->
+<div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('admin.items.import_item') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="cover">Upload File</label>
+                        <input type="file" class="form-control" name="file"/>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Import Data</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
