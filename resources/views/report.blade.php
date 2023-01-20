@@ -25,6 +25,7 @@
                         <th>QUANTITY</th>
                         <th>SUBTOTAL</th>
                         <th>DATE</th>
+                        <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +38,15 @@
                         <td>{{$transactiondetail->quantity}}</td>
                         <td>{{$transactiondetail->subtotal}}</td>
                         <td>{{$transactiondetail->created_at}}</td>
-                        
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <form action="{{ url('admin/report/deletes/'.$transactiondetail->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin Hapus')">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger btn sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -49,11 +49,12 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" id="btn-edit-buku" class="btn btn-success"
-                                    data-toggle="modal" data-target="#editItem"
-                                    data-id="{{ $item->id }}">Edit</button>
-                                <button type="button" class="btn btn-danger"
-                                    onclick="deleteConfirmation('{{ $item->id }}', '{{ $item->name }}' )">Delete</button>
+                                <a href="{{ url('admin/edit/'.$item->id) }}" class="btn btn-primary btn sm">Edit</a>
+                                <form action="{{ url('admin/deletes/'.$item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin Hapus')">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger btn sm">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

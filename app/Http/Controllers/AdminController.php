@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use App\Models\TransactionDetail;
 use App\Models\ItemCategory;
 use App\Models\Cart;
 use App\Models\Item;
@@ -13,7 +14,7 @@ use App\Exports\TransactionDetailExport;
 use App\Exports\ItemExport;
 use App\Imports\TransactionDetailImport;
 use App\Imports\ItemImport;
-use App\Models\TransactionDetail;
+use DB;
 use  Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -130,6 +131,45 @@ class AdminController extends Controller
         
         $notification = array(
             'message' => 'Import data berhasil',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('adminn.items')->with($notification);
+    }
+
+    public function delete_item($id){
+        DB::table('items')->where('id',$id)->delete();
+
+        $notification = array(
+            'message' => 'Data Berhasil Dihapus',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('adminn.items')->with($notification);
+    }
+
+    public function delete_report($id){
+        DB::table('transaction_details')->where('id',$id)->delete();
+
+        $notification = array(
+            'message' => 'Data Berhasil Dihapus',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('adminn.report')->with($notification);
+    }
+    public function edit_item($id){
+        $item = DB::table('items')->where('id', $id)->first();
+        //dd($item);
+        return view('edititem', compact('item'));
+    }
+
+    public function editprocess(Request $request, $id){
+        $item = DB::table('items')->where('id', $id)->update([
+            'item_category_id' => $request->item_category_id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock
+        ]);
+        $notification = array(
+            'message' => 'Data Berhasil Diupdate',
             'alert-type' => 'success'
         );
         return redirect()->route('adminn.items')->with($notification);

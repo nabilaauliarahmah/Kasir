@@ -81,3 +81,23 @@ Route::post('admin/report/import_transaction', [App\Http\Controllers\AdminContro
 Route::post('admin/items/import_item', [App\Http\Controllers\AdminController::class, 'import_item'])
     ->name('admin.items.import_item')
     ->middleware('is_admin');
+
+Route::delete('admin/deletes/{id}', [App\Http\Controllers\AdminController::class, 'delete_item'])
+    ->name('admin.delete_item')
+    ->middleware('is_admin');
+
+Route::delete('admin/report/deletes/{id}', [App\Http\Controllers\AdminController::class, 'delete_report'])
+    ->name('admin.delete_report')
+    ->middleware('is_admin');
+
+Route::get('admin/edit/{id}', [App\Http\Controllers\AdminController::class, 'edit_item'])
+    ->name('admin.edit_item')
+    ->middleware('is_admin');
+
+Route::get('admin/edit/{id}', [App\Http\Controllers\AdminController::class, 'edit_item'])
+    ->name('admin.edit_item')
+    ->middleware('is_admin');
+
+Route::patch('admin/{id}', [App\Http\Controllers\AdminController::class, 'editprocess'])
+->name('admin.editprocess')
+->middleware('is_admin');
